@@ -30,7 +30,7 @@
       </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item ng-repeat="Ctg in Category" ng-click="selectCategory(Ctg)" ng-class="{active:activeCategory == Ctg}">
+        <ion-item ng-repeat="Ctg in Category" ng-click="selectCategory(Ctg)" class="center" ng-class="{active:activeCategory == Ctg}">
         {{Ctg.title}}
         </ion-item>
       </ion-list>
@@ -54,16 +54,16 @@
       </ion-header-bar>
       <ion-content>
         <ion-slide-box on-slide-changed="slideHasChanged($index)">
-          <ion-slide ng-repeat="imgs in bannerImgs">
-            <div banner="{{imgs.img_url}}" class="row row-bottom" style="">
-              <div class="col center"><h1>{{imgs.title}}</h1></div>
+          <ion-slide ng-repeat="Ctg in Category">
+            <div banner="{{Ctg.url}}" class="row row-bottom banner-category" style="padding-bottom:2vh;">
+              <div class="col center"><h1 class="white pad-caption">{{Ctg.title}}</h1></div>
             </div> 
           </ion-slide>
         </ion-slide-box>
         <div class="row">
-        <center>
-          <img ng-src="{{mainQuote}}">
-        </center>
+        <div class="col center">
+          <img style="width:100%" ng-src="{{mainQuote}}">
+        </div>
         </div>
       </ion-content>
     </ion-side-menu-content>

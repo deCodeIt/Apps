@@ -30,3 +30,16 @@
     -ms-flex-align: center;
     align-items: center;
 }
+.pad-caption{
+	padding-right:1vh;
+	padding-left:1vh;
+}
+.white{
+	color:#FFFFFF;
+	background-color: rgba(0,0,0,0.5);
+}
+.banner-category{
+	background-repeat:no-repeat;
+	background-size: cover;
+	background-position: center;
+}

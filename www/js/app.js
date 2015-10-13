@@ -10,45 +10,57 @@ angular.module('snapit',['ionic'])
       var CategoryString = [
       {
         title:"Kid's Fashion",
-      }
+        url:"img/kids_fashion.jpg"
+      },
+      {
+        title:"Men's Fashion",
+        url:"img/men_fashion.jpg"
+      },
+      {
+        title:"Women's Fashion",
+        url:"img/women_fashion.jpg"
+      },
+      {
+        title:"Family Fashion",
+        url:"img/family_fashion.jpg"
+      },
+      {
+        title:"Home Decor",
+        url:"img/home_decor.jpg"
+      },
+      {
+        title:"Kitchenware",
+        url:"img/kitchen_ware.jpg"
+      },
+
       ];
       if(CategoryString){
         return CategoryString;
       }
       return [];
     },
+    quote:function(){
+      return "img/home_quote.jpg";
+    }
   }
 })
-.directive('banner',function(){
+.directive('banner',function($window){
   return{
     restrict:"A",
     link:function($scope,$element,$attrs){
-      console.log($element);
-      angular.element($element[0]);
+      var ht=$window.innerHeight;
+      console.log('url("'+$attrs.banner+'") no-repeat cover');
+      angular.element($element[0]).css({'background-image':' url("'+$attrs.banner+'")','height':'100vh'});
     }
   };
 })
 .controller('snapitCtrl',function($scope,$timeout,$window,$ionicModal, Category, $ionicSideMenuDelegate){
   
-  $scope.bannerImgs=[
-    {
-      title:"Kid's Wear",
-      img_url:"img/kids_wear.jpg"
-    },
-    {
-      title:"Men's Wear",
-      img_url:"img/mens_wear.jpg"
-    },
-    {
-      title:"Women's Wear",
-      img_url:"img/womens_wear.jpg"
-    }
-  ];
-  $scope.mainQuote="img/home_quote.jpg";
+  $scope.mainQuote=Category.quote();
 
   $scope.Category=Category.all();
 
-  $scope.activeProject = "";
+  $scope.activeCategory= "";
 
   $scope.selectCategory = function(Ctg) {
     $scope.activeCategory = Ctg;
