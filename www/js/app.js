@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('snapit',['ionic'])
-.factory('Category',function(){
+.factory('Category',function($http){
   return {
     all:function(){
       var CategoryString = [
@@ -41,6 +41,19 @@ angular.module('snapit',['ionic'])
     },
     quote:function(){
       return "img/home_quote.jpg";
+    },
+    getData:function() {
+        $http.get("http://open.api.ebay.com/shopping", { params: {"version":"713","appid":"keyserSo-d024-4e11-bb75-33ad14e31063", "ResponseEncodingType": "XML", "QueryKeywords": "Iphone","callname":"FindPopularItems" } })
+            .success(function(data) {
+              var x2js = new X2JS();
+              var jsonObject = xmlParser.xml_str2json(data);
+              console.log(JSON.stringify(jsonObject));
+                $scope.firstname = data.firstname;
+                $scope.lastname = data.lastname;
+            })
+            .error(function(data) {
+                alert("ERROR");
+            });
     }
   }
 })
@@ -49,8 +62,9 @@ angular.module('snapit',['ionic'])
     restrict:"A",
     link:function($scope,$element,$attrs){
       var ht=$window.innerHeight;
-      console.log('url("'+$attrs.banner+'") no-repeat cover');
-      angular.element($element[0]).css({'background-image':' url("'+$attrs.banner+'")','height':'100vh'});
+      //console.log(ht)
+      //console.log($window);
+      angular.element($element[0]).css({'background-image':' url("'+$attrs.banner+'")','height':(ht-44)+'px'});
     }
   };
 })
@@ -59,6 +73,7 @@ angular.module('snapit',['ionic'])
   $scope.mainQuote=Category.quote();
 
   $scope.Category=Category.all();
+  $scope.getData=Category.getData();
 
   $scope.activeCategory= "";
 
