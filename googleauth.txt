@@ -1,0 +1,8 @@
+Client ID
+548008562905-k1oio1j3o81rmh51ebovnbu4tgbkkitr.apps.googleusercontent.com
+Client Secret
+y-3F2jzHBCsO2g8PLW8EhDli
+
+SNAPPIT2
+548008562905-qdpu1g77pg2rpcl4kl5r23m5u570rfc8.apps.googleusercontent.com
+4Ag2UTfMkObh5qEw1NubCqhy

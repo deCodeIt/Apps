@@ -14,8 +14,14 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="js/ngStorage.min.js"></script>
+    <script src="js/ng-cordova.min.js"></script>
 
-    <script src="js/xml2json.min.js"></script>
+    <!--<script src="js/google-script.js"></script>-->
+    <!--<script src="https://apis.google.com/js/client.js?onload=checkAuth">
+    </script>-->
+
+    <!--<script src="js/xml2json.min.js"></script>-->
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -24,53 +30,178 @@
     <script src="js/app.js"></script>
   </head>
   <body ng-app="snapit" ng-controller="snapitCtrl">
-  <ion-side-menus ng-init="getData()">
-  
-  <ion-side-menu side="left">
-      <ion-header-bar class="bar-light">
-        <h1 class="title">Snappit</h1>
-      </ion-header-bar>
-    <ion-content>
+  <ion-side-menus>
+    <ion-side-menu-content>
+      <ion-nav-bar class="bar-light">
+        <ion-nav-back-button class="button-icon"><span class="icon ion-ios-arrow-left"></span></ion-nav-back-button>
+      </ion-nav-bar>
+      <ion-nav-view></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left">
+      <ion-header-bar class="bar bar-header bar-dark"></ion-header-bar>
+      <ion-content>
       <ion-list>
-        <ion-item ng-repeat="Ctg in Category" ng-click="selectCategory(Ctg)" class="center" ng-class="{active:activeCategory == Ctg}">
+        <ion-item ng-repeat="Ctg in Category" ng-if="true" ng-click="selectCategory(Ctg)" href="#/{{Ctg.stateName}}" class="center" ng-class="{active:activeCategory == Ctg}" menu-toggle="left">
         {{Ctg.title}}
+        </ion-item>
+        <ion-item class="center" menu-toggle="left" href="#/newproduct" ng-click="takePicture()">
+          Snapp-it
         </ion-item>
       </ion-list>
     </ion-content>
     </ion-side-menu>
 
-    <ion-side-menu-content>
-      <ion-header-bar class="bar-stable">
-      <button class="button button-icon" ng-click="toggleMenu()">
-        <i class="icon ion-navicon"></i>
-      </button>
-        <div class="title list list-inset">
-          <label class="item item-input">
-            <i class="icon ion-search placeholder-icon"></i>
-            <input type="text" placeholder="Search">
-          </label>
-        </div>
-        <button class="button button-icon" ng-click="newTask()">
-          <i class="icon ion-compose"></i>
-        </button>
-      </ion-header-bar>
-      <ion-content scroll="false">
-        <div class="row">
-        <ion-slide-box on-slide-changed="slideHasChanged($index)">
-          <ion-slide ng-repeat="Ctg in Category">
-            <div banner="{{Ctg.url}}" class="row row-bottom banner-category" style="padding-bottom:2vh;">
-              <div class="col center"><h1 class="white pad-caption">{{Ctg.title}}</h1></div>
-            </div>
-            <!--<div class="col center">
-              <img style="width:100%" ng-src="{{mainQuote}}">
-            </div>--> 
-          </ion-slide>
-        </ion-slide-box>
-        </div>
-      </ion-content>
-    </ion-side-menu-content>
-
   </ion-side-menus>
+
+  <script type="text/ng-template" id="home.html">
+      <ion-view title="Home">
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-search" ng-click="openSearch()"></button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
+      <ion-content scroll="false">
+        <div class="row no-padding">
+          <ion-slide-box on-slide-changed="slideHasChanged($index)">
+            <ion-slide ng-repeat="Ctg in Category" ng-if="Ctg.onMain">
+              <a ui-sref="{{Ctg.stateName}}" class="no-decorate"><div banner="{{Ctg.url}}" ng-click="getItems('{{Ctg.stateName}}')" class="row row-bottom banner-category" style="padding-bottom:2vh;">
+                <div class="col center"><h1 class="white pad-caption">{{Ctg.title}}</h1></div>
+              </div>
+              </a>
+            </ion-slide>
+          </ion-slide-box>
+          </div>
+        </ion-content>
+        </ion-view>
+      </script>
+    
+      <script type="text/ng-template" id="boys.html">
+      <ion-view title="Boys">
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-search" ng-click="openSearch()"></button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
+      <ion-content scroll="false">
+        <div class="row no-padding">
+          <div class="col">
+            {{itemsData}} H
+          </div>
+        </div>
+        </ion-content>
+        </ion-view>
+      </script>
+      <script type="text/ng-template" id="girls.html">
+      <ion-view title="Girls">
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-search" ng-click="openSearch()"></button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
+      <ion-content scroll="false">
+        <div class="row no-padding">
+          <div class="col"><p>girls</p> </div>
+        </div>
+        </ion-content>
+        </ion-view>
+      </script>
+      <script type="text/ng-template" id="men.html">
+      <ion-view title="Men">
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-search" ng-click="openSearch()"></button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
+      <ion-content scroll="false">
+        <div class="row no-padding">
+          <div class="col"><p>men</p> </div>
+        </div>
+        </ion-content>
+      </ion-view>
+      </script>
+      <script type="text/ng-template" id="women.html">
+      <ion-view title="Women">
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-search" ng-click="openSearch()"></button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
+      <ion-content scroll="false">
+        <div class="row no-padding">
+          <div class="col"><p>women</p> </div>
+        </div>
+        </ion-content>
+      </ion-view>
+      </script>
+      <script type="text/ng-template" id="family.html">
+      <ion-view title="Family">
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-search" ng-click="openSearch()"></button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
+      <ion-content scroll="false">
+        <div class="row no-padding">
+          <div class="col"><p>family</p> </div>
+        </div>
+        </ion-content>
+        </ion-view>
+      </script>
+      <script type="text/ng-template" id="homedecor.html">
+      <ion-view title="Home Decor">
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-search" ng-click="openSearch()"></button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
+      <ion-content scroll="false">
+        <div class="row no-padding">
+          <div class="col"><p>Home Decor</p> </div>
+        </div>
+        </ion-content>
+        </ion-view>
+      </script>
+      <script type="text/ng-template" id="kitchenware.html">
+      <ion-view title="Kitchenware">
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-search" ng-click="openSearch()"></button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
+      <ion-content scroll="false">
+        <div class="row no-padding">
+          <div class="col">
+            Hello kitchen
+          </div>
+        </div>
+        </ion-content>
+        </ion-view>
+      </script>
+      <script type="text/ng-template" id="newproduct.html">
+      <ion-view title="Uploaded Pic">
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-search" ng-click="openSearch()"></button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
+      <ion-content scroll="false">
+        <div class="row no-padding">
+          <div class="col"><img id="myImage"> </div>
+          <div id="server_images"></div>
+        </div>
+        </ion-content>
+        </ion-view>
+      </script>
 
 </body>
 </html>

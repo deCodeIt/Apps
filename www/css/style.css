@@ -43,3 +43,21 @@
 	background-size: cover;
 	background-position: center top;
 }
+.bar.bar-light {
+  background-color: rgba(255,255,255,.66) !important; /* or transparent, or background:none */
+}
+.scroll-content {
+  overflow: visible !important;
+}
+.no-padding{
+	padding:0px !important;
+}
+a.no-decorate{
+	text-decoration: none !important;
+}
+a:active.no-decorate{
+	text-decoration: none !important;
+}
+a:visited.no-decorate{
+	text-decoration: none !important;
+}
