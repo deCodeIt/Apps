@@ -61,3 +61,10 @@ a:active.no-decorate{
 a:visited.no-decorate{
 	text-decoration: none !important;
 }
+.item-select {
+  width: 100%; /* Or whatever you'd like the width to be */
+}
+
+.item-select select {
+  /*left: 0;*/
+}

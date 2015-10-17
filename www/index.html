@@ -54,12 +54,12 @@
 
   </ion-side-menus>
 
-  <script type="text/ng-template" id="home.html">
+  <script type="text/ng-template" id="home.html" >
       <ion-view title="Home">
-      <ion-nav-buttons side="right">
+      <ion-nav-buttons side="right" >
         <button class="button button-icon button-clear ion-search" ng-click="openSearch()"></button>
       </ion-nav-buttons>
-      <ion-nav-buttons side="left">
+      <ion-nav-buttons side="left" hide-back-button="true">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
       </ion-nav-buttons>
       <ion-content scroll="false">
@@ -76,7 +76,17 @@
         </ion-content>
         </ion-view>
       </script>
-    
+      <script type="text/ng-template" id="imagefull.html">
+      <ion-view title="Image">
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-search" ng-click="openSearch()"></button>
+      </ion-nav-buttons>
+      <ion-content scroll="false">
+          <img ng-src="{{imageHolder}}" style="width:100%;height:100%" />
+          <p><br><br><br><br>Imagefull</p>
+        </ion-content>
+      </ion-view>
+      </script>
       <script type="text/ng-template" id="boys.html">
       <ion-view title="Boys">
       <ion-nav-buttons side="right">
@@ -85,10 +95,16 @@
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
       </ion-nav-buttons>
-      <ion-content scroll="false">
-        <div class="row no-padding">
-          <div class="col">
-            {{itemsData}} H
+      <ion-content>
+      <div class="row" ng-repeat="items in itemsData">
+          <div style="col-25">
+            <img style="width:100%;height:150px" ng-click="showFullscreen(items)" ng-src="http://10.10.0.234/api/category/{{items.category}}/{{items.imgurl}}" />
+          </div>
+          <div class="col-50" style="margin-left:10px">
+          <p><b>{{items.itemtitle}}</b></p>
+          <p><b>Price:</b> Rs.{{items.price}}</p>
+          <p><b>Ratings:</b>{{items.rating}}/5</p>
+          <p><b>Item Details: </b>{{items.description}}</p>
           </div>
         </div>
         </ion-content>
@@ -102,9 +118,17 @@
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
       </ion-nav-buttons>
-      <ion-content scroll="false">
-        <div class="row no-padding">
-          <div class="col"><p>girls</p> </div>
+      <ion-content>
+        <div class="row" ng-repeat="items in itemsData">
+          <div style="col-25">
+            <img style="width:100%;height:150px" ng-click="showFullscreen(items)" ng-src="http://10.10.0.234/api/category/{{items.category}}/{{items.imgurl}}" />
+          </div>
+          <div class="col-50" style="margin-left:10px">
+          <p><b>{{items.itemtitle}}</b></p>
+          <p><b>Price:</b> Rs.{{items.price}}</p>
+          <p><b>Ratings:</b>{{items.rating}}/5</p>
+          <p><b>Item Details: </b>{{items.description}}</p>
+          </div>
         </div>
         </ion-content>
         </ion-view>
@@ -117,9 +141,17 @@
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
       </ion-nav-buttons>
-      <ion-content scroll="false">
-        <div class="row no-padding">
-          <div class="col"><p>men</p> </div>
+      <ion-content>
+        <div class="row" ng-repeat="items in itemsData">
+          <div style="col-25">
+            <img style="width:100%;height:150px" ng-click="showFullscreen(items)" ng-src="http://10.10.0.234/api/category/{{items.category}}/{{items.imgurl}}" />
+          </div>
+          <div class="col-50" style="margin-left:10px">
+          <p><b>{{items.itemtitle}}</b></p>
+          <p><b>Price:</b> Rs.{{items.price}}</p>
+          <p><b>Ratings:</b>{{items.rating}}/5</p>
+          <p><b>Item Details: </b>{{items.description}}</p>
+          </div>
         </div>
         </ion-content>
       </ion-view>
@@ -132,9 +164,17 @@
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
       </ion-nav-buttons>
-      <ion-content scroll="false">
-        <div class="row no-padding">
-          <div class="col"><p>women</p> </div>
+      <ion-content>
+        <div class="row" ng-repeat="items in itemsData">
+          <div style="col-25">
+            <img style="width:100%;height:150px" ng-click="showFullscreen(items)" ng-src="http://10.10.0.234/api/category/{{items.category}}/{{items.imgurl}}" />
+          </div>
+          <div class="col-50" style="margin-left:10px">
+          <p><b>{{items.itemtitle}}</b></p>
+          <p><b>Price:</b> Rs.{{items.price}}</p>
+          <p><b>Ratings:</b>{{items.rating}}/5</p>
+          <p><b>Item Details: </b>{{items.description}}</p>
+          </div>
         </div>
         </ion-content>
       </ion-view>
@@ -147,9 +187,17 @@
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
       </ion-nav-buttons>
-      <ion-content scroll="false">
-        <div class="row no-padding">
-          <div class="col"><p>family</p> </div>
+      <ion-content>
+        <div class="row" ng-repeat="items in itemsData">
+          <div style="col-25">
+            <img style="width:100%;height:150px" ng-click="showFullscreen(items)" ng-src="http://10.10.0.234/api/category/{{items.category}}/{{items.imgurl}}" />
+          </div>
+          <div class="col-50" style="margin-left:10px">
+          <p><b>{{items.itemtitle}}</b></p>
+          <p><b>Price:</b> Rs.{{items.price}}</p>
+          <p><b>Ratings:</b>{{items.rating}}/5</p>
+          <p><b>Item Details: </b>{{items.description}}</p>
+          </div>
         </div>
         </ion-content>
         </ion-view>
@@ -162,25 +210,62 @@
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
       </ion-nav-buttons>
-      <ion-content scroll="false">
-        <div class="row no-padding">
-          <div class="col"><p>Home Decor</p> </div>
+      <ion-content >
+        <div class="row" ng-repeat="items in itemsData">
+          <div style="col-25">
+            <img style="width:100%;height:150px" ng-click="showFullscreen(items)" ng-src="http://10.10.0.234/api/category/{{items.category}}/{{items.imgurl}}" />
+          </div>
+          <div class="col-50" style="margin-left:10px">
+          <p><b>{{items.itemtitle}}</b></p>
+          <p><b>Price:</b> Rs.{{items.price}}</p>
+          <p><b>Ratings:</b>{{items.rating}}/5</p>
+          <p><b>Item Details: </b>{{items.description}}</p>
+          </div>
         </div>
         </ion-content>
         </ion-view>
       </script>
-      <script type="text/ng-template" id="kitchenware.html">
-      <ion-view title="Kitchenware">
+      <script type="text/ng-template" id="gadgets.html">
+      <ion-view title="Gadgets">
       <ion-nav-buttons side="right">
         <button class="button button-icon button-clear ion-search" ng-click="openSearch()"></button>
       </ion-nav-buttons>
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
       </ion-nav-buttons>
-      <ion-content scroll="false">
-        <div class="row no-padding">
-          <div class="col">
-            Hello kitchen
+      <ion-content >
+        <div class="row" ng-repeat="items in itemsData">
+          <div style="col-25">
+            <img style="width:100%;height:150px" ng-click="showFullscreen(items)" ng-src="http://10.10.0.234/api/category/{{items.category}}/{{items.imgurl}}" />
+          </div>
+          <div class="col-50" style="margin-left:10px">
+          <p><b>{{items.itemtitle}}</b></p>
+          <p><b>Price:</b> Rs.{{items.price}}</p>
+          <p><b>Ratings:</b>{{items.rating}}/5</p>
+          <p><b>Item Details: </b>{{items.description}}</p>
+          </div>
+        </div>
+        </ion-content>
+        </ion-view>
+      </script>
+      <script type="text/ng-template" id="bedding.html">
+      <ion-view title="Bedding">
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-search" ng-click="openSearch()"></button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
+      <ion-content >
+        <div class="row" ng-repeat="items in itemsData">
+          <div style="col-25">
+            <img style="width:100%;height:150px" ng-click="showFullscreen(items)" ng-src="http://10.10.0.234/api/category/{{items.category}}/{{items.imgurl}}" />
+          </div>
+          <div class="col-50" style="margin-left:10px">
+          <p><b>{{items.itemtitle}}</b></p>
+          <p><b>Price:</b> Rs.{{items.price}}</p>
+          <p><b>Ratings:</b>{{items.rating}}/5</p>
+          <p><b>Item Details: </b>{{items.description}}</p>
           </div>
         </div>
         </ion-content>
@@ -194,10 +279,36 @@
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
       </ion-nav-buttons>
-      <ion-content scroll="false">
+      <ion-content >
         <div class="row no-padding">
-          <div class="col"><img id="myImage"> </div>
-          <div id="server_images"></div>
+          <div class="col" id="server_images"></div>
+        </div>
+        <div id="imageContent">
+        <form ng-submit="submitImage(myImg)">
+        <div class="row center">
+          <img ng-src="{{myImg.sourc}}" style="width:100%;height:300px"/>
+        </div>
+        <div class="row center">
+          <p size>Product Info</p>
+        </div>
+        <label class="input item-input">
+        <span class="input-label">Product Title:&nbsp;</span>
+          <input type="text" placeholder="Product Name?" ng-model="myImg.title" required>
+        </label>
+        <label class="item item-input item-select">
+            <div class="input-label">
+                Category&nbsp;
+            </div>
+            <select ng-model="myImg.category">
+                <option value="-1" >--Select--</option>
+                <option ng-repeat="Ctg in Category" ng-if="Ctg.stateName!='home' && $index!=1" value="{{Ctg.stateName}}" >{{Ctg.title}}</option>
+            </select>
+        </label>
+        <div class="padding">
+          <button type="submit" class="button button-block button-positive">Snappit</button>
+        </div>
+          
+        </form>
         </div>
         </ion-content>
         </ion-view>

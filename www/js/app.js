@@ -68,6 +68,22 @@ snappit.factory('Category',function($http){
       },
       {
         onMain:true,
+        title:"Gadgets",
+        url:"img/gadgets.jpg",
+        stateName:"gadgets",
+        stateUrl:"/gadgets",
+        tempUrl:"gadgets.html",
+      },
+      {
+        onMain:true,
+        title:"Bedding",
+        url:"img/bedding.jpg",
+        stateName:"bedding",
+        stateUrl:"/bedding",
+        tempUrl:"bedding.html",
+      },
+      {
+        onMain:true,
         title:"Kitchenware",
         url:"img/kitchen_ware.jpg",
         stateName:"kitchenware",
@@ -137,6 +153,21 @@ snappit.config(function($stateProvider, $urlRouterProvider) {
   templateUrl: "home.html",
   
 });
+  $stateProvider.state("bedding", {
+  url: "/bedding",
+  templateUrl: "bedding.html",
+  
+});
+  $stateProvider.state("imagefull", {
+  url: "/imagefull",
+  templateUrl: "imagefull.html",
+  
+});
+  $stateProvider.state("gadgets", {
+  url: "/gadgets",
+  templateUrl: "gadgets.html",
+  
+});
   $stateProvider.state("kitchenware", {
   url: "/kitchenware",
   templateUrl: "kitchenware.html",
@@ -196,6 +227,22 @@ snappit.controller('snapitCtrl',function($scope,$state,$window,$localStorage,
   $scope.storage=$localStorage.$default({
     counter: 42
   });
+  $scope.myImg={
+    sourc:""
+  };
+  $scope.imgObj={};
+
+  $scope.showFullscreen=function(items){
+    // console.log(imageid.price);
+    $scope.imageHolder="http://10.10.0.234/api/category/"+items.category+"/"+items.imgurl;
+    $state.go('imagefull');
+  };
+  
+  $scope.submitImage = function(my_image) {
+    $scope.imgObj = my_image;
+    
+    
+  };
   $scope.itemsData="";
   $scope.getItems = function(catg) {
         $http.get("http://10.10.0.234/api/query.php", { params: { "opt": catg } })
@@ -228,21 +275,25 @@ snappit.controller('snapitCtrl',function($scope,$state,$window,$localStorage,
         sourceType: Camera.PictureSourceType.CAMERA,
         encodingType: 0 
       };
-    $cordovaCamera.getPicture(options).then(
+    $cordovaCamera.getPicture().then(
     function(imageData) {
       $scope.picData = imageData;
+      $scope.myImg.sourc=imageData;
+      $scope.imgObj.source=imageData;
+      console.log(JSON.stringify($scope.myImg));
       $scope.ftLoad = true;
+
       $localStorage.$default({
         fotoUp: imageData
       });
       $ionicLoading.show({template: 'Photo Acquired...', duration:500});
       console.log("Photo Cached");
-      $scope.uploadPicture();
+      // $scope.uploadPicture();
       console.log("Done Uploading");
     },
     function(err){
       $ionicLoading.show({template: 'Error Acquiring Photo...', duration:500});
-      })
+      },options)
     };
 
     $scope.selectPicture = function() { 
@@ -277,7 +328,8 @@ snappit.controller('snapitCtrl',function($scope,$state,$window,$localStorage,
             if(xmlhttp.readyState === 4){
                     if (xmlhttp.status === 200) {          
                       console.log("got-200")
-                document.getElementById('server_images').innerHTML = xmlhttp.responseText;
+                // document.getElementById('server_images').innerHTML = xmlhttp.responseText;
+                // $scope.go('');
                     }
                     else { 
                       console.log("Error-200");
@@ -287,7 +339,7 @@ snappit.controller('snapitCtrl',function($scope,$state,$window,$localStorage,
                 }
             };
             xmlhttp.open("GET", server , true);
-            xmlhttp.send()} ;
+            xmlhttp.send()};
     $ionicLoading.hide();
     }
 
@@ -313,8 +365,7 @@ snappit.controller('snapitCtrl',function($scope,$state,$window,$localStorage,
     $ionicLoading.hide();}, options);
     };
 
-
-
+    
 });
 
 
