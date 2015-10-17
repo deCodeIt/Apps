@@ -233,7 +233,7 @@ snappit.controller('snapitCtrl',function($scope,$state,$window,$localStorage,
 
   $scope.showFullscreen=function(items){
     // console.log(imageid.price);
-    $scope.imageHolder="http://10.10.0.234/api/category/"+items.category+"/"+items.imgurl;
+    $scope.imageHolder="http://cleanitapp.esy.es/api/category/"+items.category+"/"+items.imgurl;
     $state.go('imagefull');
   };
   
@@ -248,7 +248,7 @@ snappit.controller('snapitCtrl',function($scope,$state,$window,$localStorage,
   };
   $scope.itemsData="";
   $scope.getItems = function(catg) {
-        $http.get("http://10.10.0.234/api/query.php", { params: { "opt": catg } })
+        $http.get("http://cleanitapp.esy.es/api/query.php", { params: { "opt": catg } })
             .success(function(data) {
                 $scope.itemsData=data;
                 console.log(data);
@@ -323,7 +323,7 @@ snappit.controller('snapitCtrl',function($scope,$state,$window,$localStorage,
 
     var viewUploadedPictures = function() {
     $ionicLoading.show({template: 'Loading Your Snap'});
-        server = "http://10.10.0.234/api/upload.php";
+        server = "http://cleanitapp.esy.es/api/upload.php";
         if (server) {
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange=function(){
@@ -364,7 +364,7 @@ snappit.controller('snapitCtrl',function($scope,$state,$window,$localStorage,
 
     var ft = new FileTransfer();
     console.log(fileURL);
-    ft.upload(fileURL, encodeURI("http://10.10.0.234/api/upload.php"), viewUploadedPictures, function(error) {console.log(JSON.stringify(error));$ionicLoading.show({template: 'Error Connecting to server :(...'});
+    ft.upload(fileURL, encodeURI("http://cleanitapp.esy.es/api/upload.php"), viewUploadedPictures, function(error) {console.log(JSON.stringify(error));$ionicLoading.show({template: 'Error Connecting to server :(...'});
     $ionicLoading.hide();}, options);
     };
 
