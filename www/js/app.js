@@ -328,7 +328,7 @@ snappit.controller('snapitCtrl',function($scope,$state,$window,$localStorage,
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange=function(){
             if(xmlhttp.readyState === 4){
-                    if (xmlhttp.status === 200) {          
+                    if (xmlhttp.status === 200) {       
                       console.log("got-200")
                 // document.getElementById('server_images').innerHTML = xmlhttp.responseText;
                 $state.go('home');

@@ -39,7 +39,7 @@
     </ion-side-menu-content>
 
     <ion-side-menu side="left">
-      <ion-header-bar class="bar bar-header bar-dark"></ion-header-bar>
+      <ion-header-bar class="bar bar-header bar-dark center"><h3 style="color:#FFFFFF">Snappit</h3></ion-header-bar>
       <ion-content>
       <ion-list>
         <ion-item ng-repeat="Ctg in Category" ng-if="true" ng-click="selectCategory(Ctg)" href="#/{{Ctg.stateName}}" class="center" ng-class="{active:activeCategory == Ctg}" menu-toggle="left">
