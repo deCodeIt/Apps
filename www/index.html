@@ -271,6 +271,29 @@
         </ion-content>
         </ion-view>
       </script>
+      <script type="text/ng-template" id="kitchenware.html">
+      <ion-view title="Kitchenware">
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-search" ng-click="openSearch()"></button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
+      <ion-content >
+        <div class="row" ng-repeat="items in itemsData">
+          <div style="col-25">
+            <img style="width:100%;height:150px" ng-click="showFullscreen(items)" ng-src="http://10.10.0.234/api/category/{{items.category}}/{{items.imgurl}}" />
+          </div>
+          <div class="col-50" style="margin-left:10px">
+          <p><b>{{items.itemtitle}}</b></p>
+          <p><b>Price:</b> Rs.{{items.price}}</p>
+          <p><b>Ratings:</b>{{items.rating}}/5</p>
+          <p><b>Item Details: </b>{{items.description}}</p>
+          </div>
+        </div>
+        </ion-content>
+        </ion-view>
+      </script>
       <script type="text/ng-template" id="newproduct.html">
       <ion-view title="Uploaded Pic">
       <ion-nav-buttons side="right">
@@ -300,8 +323,7 @@
                 Category&nbsp;
             </div>
             <select ng-model="myImg.category">
-                <option value="-1" >--Select--</option>
-                <option ng-repeat="Ctg in Category" ng-if="Ctg.stateName!='home' && $index!=1" value="{{Ctg.stateName}}" >{{Ctg.title}}</option>
+                <option ng-repeat="Ctg in Category" ng-if="Ctg.stateName!='home'" value="{{Ctg.stateName}}" >{{Ctg.title}}</option>
             </select>
         </label>
         <div class="padding">

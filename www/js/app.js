@@ -230,7 +230,6 @@ snappit.controller('snapitCtrl',function($scope,$state,$window,$localStorage,
   $scope.myImg={
     sourc:""
   };
-  $scope.imgObj={};
 
   $scope.showFullscreen=function(items){
     // console.log(imageid.price);
@@ -239,8 +238,12 @@ snappit.controller('snapitCtrl',function($scope,$state,$window,$localStorage,
   };
   
   $scope.submitImage = function(my_image) {
-    $scope.imgObj = my_image;
-    
+    $scope.myImg.itemtitle = my_image.title;
+    $scope.myImg.category=my_image.category;
+    $scope.uploadPicture();
+    console.log("BUtton Update done");
+    $scope.myImg.itemtitle="";
+    $scope.myImg.category="";
     
   };
   $scope.itemsData="";
@@ -279,7 +282,6 @@ snappit.controller('snapitCtrl',function($scope,$state,$window,$localStorage,
     function(imageData) {
       $scope.picData = imageData;
       $scope.myImg.sourc=imageData;
-      $scope.imgObj.source=imageData;
       console.log(JSON.stringify($scope.myImg));
       $scope.ftLoad = true;
 
@@ -329,7 +331,7 @@ snappit.controller('snapitCtrl',function($scope,$state,$window,$localStorage,
                     if (xmlhttp.status === 200) {          
                       console.log("got-200")
                 // document.getElementById('server_images').innerHTML = xmlhttp.responseText;
-                // $scope.go('');
+                $state.go('home');
                     }
                     else { 
                       console.log("Error-200");
@@ -354,10 +356,11 @@ snappit.controller('snapitCtrl',function($scope,$state,$window,$localStorage,
     options.chunkedMode = true;
 
     var params = {};
-    params.value1 = "bedding";
-        params.value2 = "upl";
+    params.value1 = $scope.myImg.category;
+    params.value2 = "upl";
+    params.itemtitle=$scope.myImg.itemtitle;
 
-    options.params = params;
+    options.params =  params;
 
     var ft = new FileTransfer();
     console.log(fileURL);
